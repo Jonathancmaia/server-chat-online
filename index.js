@@ -12,6 +12,9 @@ const io = require('socket.io')(server,{
 
 let messages = [];
 
+let ioPort  = process.env.port || 2000;
+let appPort  = process.env.port || 3000;
+
 //Routes
 
 app.get('/', (req, res)=>{
@@ -20,9 +23,6 @@ app.get('/', (req, res)=>{
   app.use(cors());
   res.send(v4());
 });
-
-let ioPort  = process.env.port || 2000;
-let appPort  = process.env.port || 3000;
 
 //Events
 io.on('connect', (socket) => {
@@ -89,10 +89,6 @@ io.on('connect', (socket) => {
   });
 });
 
-io.listen(ioPort, ()=>{
-  console.log('io running on '+ioPort)
-});
+io.listen(ioPort);
 
-app.listen(appPort, ()=>{
-  console.log('app running on '+appPort)
-});
+app.listen(appPort);
