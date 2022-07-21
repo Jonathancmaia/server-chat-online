@@ -2,8 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server,{
+const SocketIO = require('socket.io');
+
+let port  = process.env.PORT || 3000;
+
+const io = SocketIO(app.listen(port),{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -11,9 +14,6 @@ const io = require('socket.io')(server,{
 });
 
 let messages = [];
-
-let ioPort  = process.env.PORT || 2000;
-let appPort  = process.env.PORT || 3000;
 
 //Routes
 
@@ -88,7 +88,3 @@ io.on('connect', (socket) => {
     }
   });
 });
-
-io.listen(ioPort);
-
-app.listen(appPort);
