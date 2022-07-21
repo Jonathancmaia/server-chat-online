@@ -5,12 +5,10 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server,{
   cors: {
-    origin: "http://localhost:3001",
+    origin: "*",
     methods: ["GET", "POST"],
   }
 });
-
-const port = 3000;
 
 let messages = [];
 
@@ -22,6 +20,9 @@ app.get('/', (req, res)=>{
   app.use(cors());
   res.send(v4());
 });
+
+let ioPort  = process.env.port || 2000;
+let appPort  = process.env.port || 3000;
 
 //Events
 io.on('connect', (socket) => {
@@ -88,5 +89,10 @@ io.on('connect', (socket) => {
   });
 });
 
-io.listen(2000);
-app.listen(port);
+io.listen(ioPort, ()=>{
+  console.log('io running on '+ioPort)
+});
+
+app.listen(appPort, ()=>{
+  console.log('app running on '+appPort)
+});
