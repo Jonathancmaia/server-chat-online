@@ -12,8 +12,8 @@ const io = require('socket.io')(server,{
 
 let messages = [];
 
-let ioPort  = process.env.port || 2000;
-let appPort  = process.env.port || 3000;
+let ioPort  = process.env.PORT || 2000;
+let appPort  = process.env.PORT || 3000;
 
 //Routes
 
