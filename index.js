@@ -29,10 +29,6 @@ app.get('/', (req, res)=>{
 //Events
 io.on('connect', (socket) => {
 
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-  app.use(cors());
-
   //Join treatment
   const room = socket.handshake.query.room;
   const user = socket.id;
@@ -109,4 +105,9 @@ var options = {
   debug: true
 }
 
-app.use('/peerjs', ExpressPeerServer(peerServer, options));
+app.use('/peerjs', () => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+  app.use(cors());
+  ExpressPeerServer(peerServer, options);
+});
