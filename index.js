@@ -89,10 +89,6 @@ io.on('connect', (socket) => {
   });
 });
 
-var ExpressPeerServer = require('peer').ExpressPeerServer;
-var server = require('http').createServer(app);
-var options = {
-  debug: true
-}
-app.use('/peerjs', ExpressPeerServer(server, options));
-server.listen(9000);
+//peerjs config
+var PeerServer = require('peer').PeerServer;
+var server = PeerServer({port: 9000, path: '/myapp'});
