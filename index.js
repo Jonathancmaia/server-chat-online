@@ -6,7 +6,9 @@ const SocketIO = require('socket.io');
 
 let port  = process.env.PORT || 3000;
 
-const io = SocketIO(app.listen(port),{
+let appListen = app.listen(port);
+
+const io = SocketIO(appListen,{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -93,7 +95,7 @@ io.on('connect', (socket) => {
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var server = require('http').createServer(app);
 
-server.listen(9000);
+server.listen(appListen);
 
 var options = {
   debug: true
