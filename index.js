@@ -11,7 +11,12 @@ var options = {
   debug: true
 }
 app.use('/peerjs', ExpressPeerServer(server, options));
-server.listen(443);
+server.listen(443,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  }
+});
 //PEERJS
 
 let port  = process.env.PORT || 3000;
