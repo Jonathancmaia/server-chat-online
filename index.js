@@ -11,7 +11,7 @@ let appListen = app.listen(port);
 const io = SocketIO(appListen,{
   cors: {
     origin: "*",
-    methods: "*",
+    methods: ["GET", "POST"],
   }
 });
 
@@ -30,6 +30,7 @@ app.get('/', (req, res)=>{
 io.on('connect', (socket) => {
 
   //Join treatment
+
   const room = socket.handshake.query.room;
   const user = socket.id;
 
@@ -92,22 +93,12 @@ io.on('connect', (socket) => {
 
 //peerjs config
 var ExpressPeerServer = require('peer').ExpressPeerServer;
-var peerServer = require('http').createServer(app);
+var server = require('http').createServer(app);
 
-peerServer.listen(appListen, {
-  cors: {
-    origin: "*",
-    methods: "*",
-  }
-});
+server.listen(9000);
 
 var options = {
   debug: true
 }
 
-app.use('/peerjs', (req, res)=>{
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
-  app.use(cors());
-  ExpressPeerServer(peerServer, options)}
-);
+app.use('/peerjs', ExpressPeerServer(server, options));
