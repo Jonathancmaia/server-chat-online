@@ -92,7 +92,7 @@ io.on('connect', (socket) => {
 });
 
 //peerjs config
-var ExpressPeerServer = require('peer').ExpressPeerServer;
+/*var ExpressPeerServer = require('peer').ExpressPeerServer;
 var server = require('http').createServer(app);
 
 server.listen(appListen, {
@@ -106,4 +106,4 @@ var options = {
   debug: true
 }
 
-app.use('/peerjs', ExpressPeerServer(server, options));
+app.use('/peerjs', ExpressPeerServer(server, options));*/
