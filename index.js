@@ -95,7 +95,7 @@ io.on('connect', (socket) => {
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var server = require('http').createServer(app);
 
-server.listen(9000);
+server.listen();
 
 var options = {
   debug: true
