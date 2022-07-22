@@ -9,7 +9,7 @@ let port  = process.env.PORT || 3000;
 const io = SocketIO(app.listen(port),{
   cors: {
     origin: "*",
-    methods: ["*"],
+    methods: ["GET", "POST"],
   }
 });
 
@@ -87,14 +87,4 @@ io.on('connect', (socket) => {
       delete messages[room];
     }
   });
-
-  //PPERJS
-  var ExpressPeerServer = require('peer').ExpressPeerServer;
-  var server = require('http').createServer(app);
-  var options = {
-    debug: true
-  }
-  app.use('/peerjs', ExpressPeerServer(server, options));
-  server.listen(443);
-  //PEERJS
 });
