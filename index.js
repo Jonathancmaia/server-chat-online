@@ -95,7 +95,12 @@ io.on('connect', (socket) => {
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var server = require('http').createServer(app);
 
-server.listen(appListen);
+server.listen(appListen, {
+  cors: {
+    origin: "*",
+    methods: ["*"],
+  }
+});
 
 var options = {
   debug: true
