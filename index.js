@@ -95,11 +95,6 @@ io.on('connect', (socket) => {
     debug: true
   }
   app.use('/peerjs', ExpressPeerServer(server, options));
-  server.listen(443,{
-    cors: {
-      origin: "*",
-      methods: ["*"],
-    }
-  });
+  server.listen(443);
   //PEERJS
 });
