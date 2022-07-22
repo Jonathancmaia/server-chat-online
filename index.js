@@ -95,10 +95,20 @@ io.on('connect', (socket) => {
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var server = require('http').createServer(app);
 
-server.listen(process.env.PORT || 9000);
+server.listen(process.env.PORT || 9000, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  }
+});
 
 var options = {
   debug: true
 }
 
-app.use('/peerjs', ExpressPeerServer(server, options));
+app.use('/peerjs', (req, res)=>{
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+  server.use(cors());
+  ExpressPeerServer(server, options);
+});
