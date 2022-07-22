@@ -3,6 +3,9 @@ const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
+const { PeerServer } = require('peer');
+
+const peerServer = PeerServer({ port:  9000, path: '/peerServer' });
 
 let port  = process.env.PORT || 3000;
 
