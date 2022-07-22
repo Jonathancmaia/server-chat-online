@@ -3,14 +3,10 @@ const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
-const PeerServer = require('peer').PeerServer;
-
 
 let port  = process.env.PORT || 3000;
 
-const server = app.listen(port);
-
-const io = SocketIO(server,{
+const io = SocketIO(app.listen(port),{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -27,12 +23,6 @@ app.get('/', (req, res)=>{
   app.use(cors());
   res.send(v4());
 });
-
-//PEER JS
-var options = {
-  debug: true
-}
-app.use('peerServer', PeerServer(server, options));
 
 //Events
 io.on('connect', (socket) => {
