@@ -5,7 +5,7 @@ const app = express();
 const SocketIO = require('socket.io');
 const { PeerServer } = require('peer');
 
-const peerServer = PeerServer({ port:  9000, path: '/peerServer' });
+const peerServer = PeerServer({ port:  9000, path: '/' });
 
 let port  = process.env.PORT || 3000;
 
