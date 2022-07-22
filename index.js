@@ -32,7 +32,7 @@ app.get('/', (req, res)=>{
 var options = {
   debug: true
 }
-app.use('peerSeerver', PeerServer(server, options));
+app.use('peerServer', PeerServer(server, options));
 
 //Events
 io.on('connect', (socket) => {
