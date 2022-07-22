@@ -95,7 +95,7 @@ io.on('connect', (socket) => {
 
 //peerjs config
 var ExpressPeerServer = require('peer').ExpressPeerServer;
-var peerServer = require('http').createServer(app);
+var peerServer = new PeerServer({path: '/peerjs', port: 9000, debug: true});
 
 peerServer.listen(appListen, {
   cors: {
@@ -103,10 +103,6 @@ peerServer.listen(appListen, {
     methods: ["*"],
   }
 });
-
-var options = {
-  debug: true
-}
 
 app.use('/peerjs', () => {
   res.header("Access-Control-Allow-Origin", "*");
