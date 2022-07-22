@@ -29,8 +29,11 @@ app.get('/', (req, res)=>{
 //Events
 io.on('connect', (socket) => {
 
-  //Join treatment
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+  app.use(cors());
 
+  //Join treatment
   const room = socket.handshake.query.room;
   const user = socket.id;
 
