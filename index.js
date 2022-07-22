@@ -4,6 +4,16 @@ const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
 
+//PPERJS
+var ExpressPeerServer = require('peer').ExpressPeerServer;
+var server = require('http').createServer(app);
+var options = {
+  debug: true
+}
+app.use('/peerjs', ExpressPeerServer(server, options));
+server.listen(9000);
+//PEERJS
+
 let port  = process.env.PORT || 3000;
 
 const io = SocketIO(app.listen(port),{
