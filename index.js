@@ -11,7 +11,7 @@ let appListen = app.listen(port);
 const io = SocketIO(appListen,{
   cors: {
     origin: "*",
-    methods: ["GET", "POST"],
+    methods: ["*"],
   }
 });
 
@@ -92,10 +92,10 @@ io.on('connect', (socket) => {
 });
 
 //peerjs config
-/*var ExpressPeerServer = require('peer').ExpressPeerServer;
-var server = require('http').createServer(app);
+var ExpressPeerServer = require('peer').ExpressPeerServer;
+var peerServer = require('http').createServer(app);
 
-server.listen(appListen, {
+peerServer.listen(appListen, {
   cors: {
     origin: "*",
     methods: ["*"],
@@ -106,4 +106,4 @@ var options = {
   debug: true
 }
 
-app.use('/peerjs', ExpressPeerServer(server, options));*/
+app.use('/peerjs', ExpressPeerServer(peerServer, options));
