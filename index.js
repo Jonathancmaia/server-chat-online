@@ -106,6 +106,6 @@ peerServer.listen(appListen, {
 
 app.use('/peerjs', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  req.header("Access-Control-Allow-Origin", "*");
   ExpressPeerServer(peerServer, options);
 });
