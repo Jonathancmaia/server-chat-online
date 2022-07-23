@@ -2,10 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server,{
+const SocketIO = require('socket.io');
+
+let port  = 4000;
+
+let appListen = app.listen(port);
+
+const io = SocketIO(appListen,{
   cors: {
-    origin: "http://localhost:3001",
+    origin: "*",
     methods: ["GET", "POST"],
   }
 });
@@ -30,7 +35,7 @@ io.on('connect', (socket) => {
   const user = socket.id;
 
   socket.join(room);
-
+  
   socket.on('newUserConnected', () =>{
     socket.emit('getUser', user);
 
@@ -43,7 +48,7 @@ io.on('connect', (socket) => {
     } else {
       arrUserList = arrUserList;
     }
-
+    
     io.in(room).emit('getUserList', Array.from(userList));
 
     if(messages[room]){
@@ -85,6 +90,3 @@ io.on('connect', (socket) => {
     }
   });
 });
-
-io.listen(2123);
-app.listen(4123); 
