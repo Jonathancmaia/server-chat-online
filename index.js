@@ -6,8 +6,6 @@ const SocketIO = require('socket.io');
 
 let port  = 8080;
 
-console.log(port)
-
 let appListen = app.listen(port);
 
 const io = SocketIO(appListen,{
