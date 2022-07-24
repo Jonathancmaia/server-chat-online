@@ -4,6 +4,12 @@ const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
 
+const ExpressPeerServer = require('peer').ExpressPeerServer;
+const peerServer = ExpressPeerServer(app, {
+  debug: true
+});
+app.use('/peerjs', peerServer);
+
 let port  = 8080;
 
 let appListen = app.listen(port);
