@@ -4,15 +4,6 @@ const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
 
-//PEER SERVER
-const ExpressPeerServer = require('peer').ExpressPeerServer;
-const peerServer = ExpressPeerServer(app, {
-  port: 8000,
-  proxied: true
-});
-app.use('/peerjs', peerServer);
-//PEER SERVER
-
 let port  = 8080;
 
 let appListen = app.listen(port);
@@ -23,6 +14,11 @@ const io = SocketIO(appListen,{
     methods: ["GET", "POST"],
   }
 });
+
+//PEER SERVER
+const ExpressPeerServer = require('peer').ExpressPeerServer;
+const peerServer = ExpressPeerServer(appListen);
+//PEER SERVER
 
 let messages = [];
 
