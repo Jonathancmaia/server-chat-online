@@ -4,11 +4,7 @@ const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
 
-let port  = 8080;
-
-let appListen = app.listen(port);
-
-const io = SocketIO(appListen,{
+const io = SocketIO(app.listen(8080),{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -16,20 +12,26 @@ const io = SocketIO(appListen,{
 });
 
 //PEER SERVER
+const http = require('http');
+const server = http.createServer(app);
 const ExpressPeerServer = require('peer').ExpressPeerServer;
-const peerServer = ExpressPeerServer(appListen);
+const peerServer = ExpressPeerServer(server);
+
+app.use('/peerjs', peerServer);
+
+server.listen(8000);
 //PEER SERVER
 
 let messages = [];
 
 //Routes
 
-app.get('/', (req, res)=>{
+/*app.get('/', (req, res)=>{
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
   app.use(cors());
   res.send(v4());
-});
+});*/
 
 //Events
 io.on('connect', (socket) => {
