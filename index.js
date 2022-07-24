@@ -3,17 +3,18 @@ const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
-const { PeerServer } = require('peer');
 
-//PEERSERVER
-const peerServer = PeerServer({
-  port: 8000,
-  path: '/',
+//PEER SERVER
+const ExpressPeerServer = require('peer').ExpressPeerServer;
+const peerServer = ExpressPeerServer(app, {
   debug: true
 });
-//PEERSERVER
+app.use('/peerjs', peerServer);
+//PEER SERVER
 
-let appListen = app.listen(8080);
+let port  = 8080;
+
+let appListen = app.listen(port);
 
 const io = SocketIO(appListen,{
   cors: {
