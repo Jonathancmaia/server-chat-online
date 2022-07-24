@@ -12,15 +12,8 @@ const io = SocketIO(app.listen(8080),{
 });
 
 //PEER SERVER
-const http = require('http');
-const peerListener = express();
-const server = http.createServer(peerListener);
-const ExpressPeerServer = require('peer').ExpressPeerServer;
-const peerServer = ExpressPeerServer(server);
-
-peerListener.use('/', peerServer)
-
-server.listen(8000);
+const PeerServer = require('peer').PeerServer;
+const server = new PeerServer({port: 8000});
 //PEER SERVER
 
 let messages = [];
