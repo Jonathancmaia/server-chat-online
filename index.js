@@ -5,13 +5,14 @@ const app = express();
 const SocketIO = require('socket.io');
 const { PeerServer } = require('peer');
 
+//PEERSERVER
 const peerServer = PeerServer({
   port: 8000,
   path: '/',
   debug: true
 });
+//PEERSERVER
 
-peerServer.listen(8000);
 let appListen = app.listen(8080);
 
 const io = SocketIO(appListen,{
