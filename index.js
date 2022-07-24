@@ -3,6 +3,15 @@ const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
+const { PeerServer } = require('peer');
+
+//PEERSERVER
+const peerServer = PeerServer({
+  port: 8000,
+  path: '/',
+  debug: true
+});
+//PEERSERVER
 
 let appListen = app.listen(8080);
 
