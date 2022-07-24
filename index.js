@@ -11,9 +11,8 @@ const peerServer = PeerServer({
   debug: true
 });
 
-let port  = 8080;
-
-let appListen = app.listen(port);
+peerServer.listen(8000);
+let appListen = app.listen(8080);
 
 const io = SocketIO(appListen,{
   cors: {
