@@ -11,15 +11,9 @@ const io = SocketIO(app.listen(8080),{
   }
 });
 
-//PEER SERVER
-const PeerServer = require('peer').PeerServer;
-const server = new PeerServer({port: 8000, path: '/'});
-//PEER SERVER
-
 let messages = [];
 
 //Routes
-
 app.get('/', (req, res)=>{
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
@@ -31,7 +25,6 @@ app.get('/', (req, res)=>{
 io.on('connect', (socket) => {
 
   //Join treatment
-
   const room = socket.handshake.query.room;
   const user = socket.id;
 
@@ -57,6 +50,7 @@ io.on('connect', (socket) => {
     }
   });
 
+  //disconect treatment
   socket.on('disconnect', () => {
     let userList = io.sockets.adapter.rooms.get(room);
 
