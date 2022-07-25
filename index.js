@@ -11,11 +11,6 @@ const io = SocketIO(app.listen(8080),{
   }
 });
 
-//PEER SERVER
-const PeerServer = require('peer').PeerServer;
-const server = new PeerServer({port: 8000});
-//PEER SERVER
-
 let messages = [];
 
 //Routes
