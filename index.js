@@ -21,7 +21,7 @@ app.get('/', (req, res)=>{
   res.send(v4());
 });
 
-//Events
+//Io Events
 io.on('connect', (socket) => {
 
   //Join treatment
@@ -67,7 +67,6 @@ io.on('connect', (socket) => {
   });
 
   //Messages treatment
-
   socket.on('newMessage', (args) => {
     if(messages[room] === undefined){
       messages[room] = [];
@@ -79,6 +78,7 @@ io.on('connect', (socket) => {
     io.in(room).emit('getChat', messages[room]);
   });
 
+  //Empty room treatment
   io.of("/").adapter.on("delete-room", (room) => {
     if(messages[room] !== undefined){
       delete messages[room];
