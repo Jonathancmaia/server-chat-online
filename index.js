@@ -4,7 +4,7 @@ const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
 
-const io = SocketIO(app.listen(8080),{
+const io = SocketIO(app.listen(7000),{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
