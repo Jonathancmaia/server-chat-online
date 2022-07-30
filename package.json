@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "startDev": "nodemon index.js",
-    "peerjsServer": "nodemon peer-server.js"
+    "startPeer": "node peer-server.js",
+    "startDevPeer": "nodemon peer-server.js"
   },
   "author": "",
   "license": "ISC",
