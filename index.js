@@ -12,6 +12,7 @@ const io = SocketIO(app.listen(7000),{
 });
 
 let messages = [];
+let nicknames = [];
 
 //Routes
 app.get('/', (req, res)=>{
@@ -27,10 +28,13 @@ io.on('connect', (socket) => {
   //Join treatment
   const room = socket.handshake.query.room;
   const user = socket.id;
+  let myNickname = false;
 
   socket.join(room);
+
+  io.in(room).emit('getNickname', nicknames[room]);
   
-  socket.on('newUserConnected', () =>{
+  socket.on('newUserConnected', () => {
     socket.emit('getUser', user);
 
     let userList= io.sockets.adapter.rooms.get(room);
@@ -61,6 +65,10 @@ io.on('connect', (socket) => {
     } else {
       arrUserList = arrUserList;
     }
+  
+    if (myNickname){
+      delete nicknames[room][myNickname];
+    }
 
     io.in(room).emit('getUserList', arrUserList);
     io.in(room).emit('removeVideo', user);
@@ -76,6 +84,34 @@ io.on('connect', (socket) => {
     }
 
     io.in(room).emit('getChat', messages[room]);
+  });
+
+  //Nickname change
+  socket.on('sendNickname', (arg)=>{
+    if(nicknames[room] === undefined){
+      nicknames[room] = [];
+      nicknames[room].push(arg);
+      myNickname = 0;
+    } else {
+      let index = false;
+      for (let i = -1; i <= nicknames[room].length;){
+        if (nicknames[room][i] !== undefined){
+          if(nicknames[room][i].user === user){
+            index = i;
+          }
+        }
+        i++;
+      }
+
+      if(index !== false){
+        nicknames[room][index] = arg;
+        myNickname = index;
+      } else {
+        nicknames[room].push(arg);
+        myNickname = nicknames[room].length;
+      }
+    }
+    io.in(room).emit('getNickname', nicknames[room]);
   });
 
   //Empty room treatment
