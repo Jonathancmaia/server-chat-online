@@ -3,8 +3,16 @@ const cors = require('cors');
 const { v4 } = require('uuid');
 const app = express();
 const SocketIO = require('socket.io');
+const https = require('https');
+const fs = require('fs');
 
-const io = SocketIO(app.listen(7000),{
+
+const httpServer = https.createServer({
+  cert: fs.readFileSync('free-chat-online.cf/fullchain.pem'),
+  key: fs.readFileSync('free-chat-online.cf/privkey.pem')
+}, app).listen(7000);
+
+const io = SocketIO(httpServer,{
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
