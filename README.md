@@ -9,6 +9,7 @@ This app is in development stage, then, it's not so usable yet.
 # Technologies Used
 
 - React.js
+- NodeJS
 - Javascript
 - HTML
 - CSS
