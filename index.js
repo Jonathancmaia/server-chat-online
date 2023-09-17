@@ -8,14 +8,14 @@ const fs = require('fs');
 
 const httpsServer = https
   .createServer(
-    /*{
+    {
       cert: fs.readFileSync(
         '/etc/letsencrypt/live/free-chat-online.cf/fullchain.pem',
       ),
       key: fs.readFileSync(
         '/etc/letsencrypt/live/free-chat-online.cf/privkey.pem',
       ),
-    },*/
+    },
     app,
   )
   .listen(7000);
