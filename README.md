@@ -24,5 +24,5 @@ This app is in development stage, then, it's not so usable yet.
 # How to use
 
 - Access the website through your browser (https://free-chat-online.cf)
-- Accept the webcam and microphon request from your web browser
+- Accept the webcam and microphone request from your web browser
 - Send the link from the room where are you connected and have a good talk =)
