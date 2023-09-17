@@ -10,10 +10,10 @@ const httpsServer = https
   .createServer(
     {
       cert: fs.readFileSync(
-        '/etc/letsencrypt/live/free-chat-online.cf/fullchain.pem',
+        '/etc/letsencrypt/live/vps49384.publiccloud.com.br/fullchain.pem',
       ),
       key: fs.readFileSync(
-        '/etc/letsencrypt/live/free-chat-online.cf/privkey.pem',
+        '/etc/letsencrypt/live/vps49384.publiccloud.com.br/privkey.pem',
       ),
     },
     app,
